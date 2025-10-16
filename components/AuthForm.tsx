@@ -20,6 +20,8 @@ import { toast } from "sonner"
 import { log } from "console"
 import FormFields from "./FormField"
 import { useRouter } from "next/navigation"
+import { auth } from "@/firebase/client";
+
 
 
 
