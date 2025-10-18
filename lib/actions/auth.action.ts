@@ -34,7 +34,7 @@ export async function signUp(
     } catch (e: any){
         console.log('error creating a user', e);
 
-        if(e.code === 'auth/email-already-exists'){
+        if(e.code === 'auth/email-already-in-use'){
           return{
             success: false,
             message: 'Email already in use'
@@ -81,7 +81,7 @@ export async function setSessionCookie(idToken: string){
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         path: '/',
-        sameSite: 'lax',
+        sameSite: 'lax'
 
     })
 

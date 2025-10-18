@@ -6,6 +6,7 @@ import { Button } from './ui/button';
 import Link from 'next/link';
 import DisplayTechIcons from './DispalyTechIcons';
 
+
 // import { Link } from 'next/link';
 
 const InterviewCard = ({interviewId , userId, role, type, teckstack, createdAt, techstack}: InterviewFormProps & { techstack?: string[] }) => {
