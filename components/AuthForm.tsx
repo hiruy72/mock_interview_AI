@@ -5,24 +5,19 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
   Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+
 } from "@/components/ui/form"
 
-import { Input } from "@/components/ui/input"
+
 import Image from "next/image"
 import Link from "next/link"
-import { id, is } from "zod/v4/locales"
+
 import { toast } from "sonner"
-import { log } from "console"
+
 import FormFields from "./FormField"
 import { useRouter } from "next/navigation"
 import { auth } from "@/firebase/client";
-import { sign } from "crypto"
+
 import { signUp, signIn } from "@/lib/actions/auth.action";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 

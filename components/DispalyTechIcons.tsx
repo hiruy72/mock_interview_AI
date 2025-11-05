@@ -2,10 +2,10 @@ import { getTechLogos } from '@/lib/utils'
 import Image from 'next/image'
 import React from 'react'
 
-interface TechIcon {
-  tech: string
-  url: string
-}
+// interface TechIcon {
+//   tech: string
+//   url: string
+// } 
 
 interface TechIconProps {
   techStack?: string[]
