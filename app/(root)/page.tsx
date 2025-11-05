@@ -7,7 +7,9 @@ import { dummyInterviews } from '@/constants'
 
 const Page = () => {
   return (
-    <>
+   <>
+   
+   <div>
       {/* Hero Section */}
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
@@ -57,6 +59,7 @@ const Page = () => {
           )}
         </div>
       </section>
+      </div>
     </>
   )
 }
