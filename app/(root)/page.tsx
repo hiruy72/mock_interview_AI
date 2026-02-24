@@ -27,9 +27,12 @@ const Page = async () => {
       {/* Hero Section */}
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
-          <h2 className="text-2xl font-semibold">
-            Get Interview-Ready with AI-Powered Practice & Feedback
-          </h2>
+          <div className="flex flex-col gap-1">
+            <p className="text-primary-100 font-medium">Welcome back, {user.name} 👋</p>
+            <h2 className="text-2xl font-semibold">
+              Get Interview-Ready with AI-Powered Practice & Feedback
+            </h2>
+          </div>
           <p className="text-lg">
             Practice real interview questions & get instant AI feedback to ace
             your next job interview.
