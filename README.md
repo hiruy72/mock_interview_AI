@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PrepWise - AI-Powered Mock Interview Platform
+
+PrepWise helps users practice job interviews, receive instant AI feedback, and track their progress. Built with **Next.js**, **Firebase**, and **TypeScript**.
+
+---
+
+## Features
+
+- Sign up / Sign in with Firebase Authentication  
+- Create and take mock interviews  
+- View interview feedback and scores  
+- AI-powered guidance for improving answers  
+- Responsive UI with Tailwind CSS  
+- Fully client- and server-rendered pages using Next.js app router  
+
+---
+
+## Tech Stack
+
+- **Next.js 15** (App Router & Turbopack)  
+- **React & TypeScript**  
+- **Firebase** (Authentication & Firestore)  
+- **Tailwind CSS** for styling  
+- **Sonner** for notifications  
+- **Day.js** for date formatting  
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/<your-username>/prepwise.git
+cd prepwise
+```
+### 2. Install dependencies
+```bash
+npm install
+```
+### 3. Setup environment variables
+
+Create a .env.local file in the root with your Firebase configuration:
+```bash
+ NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. Run the development server
+```bash
+npm run dev
+```
