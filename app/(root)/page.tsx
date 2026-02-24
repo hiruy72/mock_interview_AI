@@ -1,23 +1,38 @@
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import InterviewCard from '@/components/InterviewCard'
-import { dummyInterviews } from '@/constants'
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import InterviewCard from "@/components/InterviewCard";
+import { getCurrentUser } from "@/lib/actions/auth.action";
+import {
+  getInterviewsByUserId,
+  getLatestInterviews,
+} from "@/lib/actions/general.action";
+import { redirect } from "next/navigation";
 
-const Page = () => {
+const Page = async () => {
+  const user = await getCurrentUser();
+  if (!user) redirect("/sign-in");
+
+  const [userInterviews, latestInterviews] = await Promise.all([
+    getInterviewsByUserId(user.id),
+    getLatestInterviews({ userId: user.id }),
+  ]);
+
+  const hasPastInterviews = userInterviews.length > 0;
+  const hasLatestInterviews = latestInterviews.length > 0;
+
   return (
-   <>
-   
-   <div>
+    <>
       {/* Hero Section */}
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
           <h2 className="text-2xl font-semibold">
             Get Interview-Ready with AI-Powered Practice & Feedback
           </h2>
-          <p className="text-lg text-gray-700">
-            Practice real interview questions and get instant feedback.
+          <p className="text-lg">
+            Practice real interview questions & get instant AI feedback to ace
+            your next job interview.
           </p>
           <Button asChild className="btn-primary max-sm:w-full">
             <Link href="/interview">Start an Interview</Link>
@@ -36,12 +51,20 @@ const Page = () => {
       <section className="flex flex-col gap-6 mt-8">
         <h2 className="text-xl font-semibold">Your Interviews</h2>
         <div className="interviews-section">
-          {dummyInterviews.length > 0 ? (
-            dummyInterviews.map((interview) => (
-              <InterviewCard {...interview} key={interview.id} />
+          {hasPastInterviews ? (
+            userInterviews.map((interview) => (
+              <InterviewCard
+                key={interview.id}
+                interviewId={interview.id}
+                userId={interview.userId}
+                role={interview.role}
+                type={interview.type}
+                techstack={interview.techstack}
+                createdAt={interview.createdAt}
+              />
             ))
           ) : (
-            <p>You haven’t created any interviews yet.</p>
+            <p>You haven&apos;t created any interviews yet.</p>
           )}
         </div>
       </section>
@@ -50,18 +73,25 @@ const Page = () => {
       <section className="flex flex-col gap-6 mt-8">
         <h2 className="text-xl font-semibold">Take an Interview</h2>
         <div className="interviews-section">
-          {dummyInterviews.length > 0 ? (
-            dummyInterviews.map((interview) => (
-              <InterviewCard {...interview} key={interview.id} />
+          {hasLatestInterviews ? (
+            latestInterviews.map((interview) => (
+              <InterviewCard
+                key={interview.id}
+                interviewId={interview.id}
+                userId={interview.userId}
+                role={interview.role}
+                type={interview.type}
+                techstack={interview.techstack}
+                createdAt={interview.createdAt}
+              />
             ))
           ) : (
-            <p>You haven’t taken any interviews yet.</p>
+            <p>No interviews available from other users yet.</p>
           )}
         </div>
       </section>
-      </div>
     </>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
