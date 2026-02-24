@@ -56,11 +56,12 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
             const snapshot = await uploadBytes(storageRef, file);
             const downloadURL = await getDownloadURL(snapshot.ref);
 
+            setPreviewImage(downloadURL);
             form.setValue("image", downloadURL);
             toast.success("Image uploaded successfully", { id: toastId });
         } catch (error) {
             console.error("Error uploading image:", error);
-            toast.error("Failed to upload image", { id: toastId });
+            toast.error("Failed to upload image. Please try again.", { id: toastId });
         } finally {
             setUploading(false);
         }
@@ -94,7 +95,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
         <div className="card-border w-full max-w-2xl mx-auto">
             <div className="flex flex-col gap-8 card py-12 px-8 md:px-12">
                 <div className="flex flex-col items-center gap-4">
-                    <div className="relative group cursor-pointer" onClick={() => fileInputRef.current?.click()}>
+                    <div className="relative group cursor-pointer" onClick={() => !uploading && fileInputRef.current?.click()}>
                         <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary-200/30 flex items-center justify-center bg-dark-200 relative">
                             {previewImage ? (
                                 <Image
@@ -104,18 +105,20 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
                                     className="object-cover"
                                 />
                             ) : (
-                                <span className="text-4xl font-bold text-light-100">{user.name?.charAt(0).toUpperCase()}</span>
+                                <span className="text-4xl font-bold text-primary-100">{user.name?.charAt(0).toUpperCase()}</span>
                             )}
 
                             {uploading && (
-                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                                <div className="absolute inset-0 bg-black/60 z-20 flex items-center justify-center">
                                     <Loader2 className="w-8 h-8 animate-spin text-primary-100" />
                                 </div>
                             )}
 
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <Camera className="w-8 h-8 text-white" />
-                            </div>
+                            {!uploading && (
+                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 z-10 transition-opacity flex items-center justify-center">
+                                    <Camera className="w-8 h-8 text-white" />
+                                </div>
+                            )}
                         </div>
                         <input
                             type="file"
