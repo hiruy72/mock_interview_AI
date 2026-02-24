@@ -11,7 +11,7 @@ export async function updateUser(params: {
     const { userId, name, image } = params;
 
     try {
-        const updateData: any = {};
+        const updateData: Record<string, string> = {};
         if (name) updateData.name = name;
         if (image) updateData.image = image;
 

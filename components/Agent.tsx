@@ -23,6 +23,13 @@ interface SavedMessage {
   content: string;
 }
 
+interface Message {
+  type: string;
+  transcriptType?: string;
+  role: "user" | "assistant" | "system";
+  transcript: string;
+}
+
 const Agent = ({ userName, userId, userImage, interviewId, feedbackId, type, questions }: AgentProps) => {
   const router = useRouter();
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);

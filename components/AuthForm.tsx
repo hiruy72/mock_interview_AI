@@ -116,9 +116,10 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
             }
 
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error("Auth Error:", error);
-            const errorMessage = error.message || "An unexpected error occurred. Please try again.";
+            const err = error as { message?: string };
+            const errorMessage = err.message || "An unexpected error occurred. Please try again.";
             toast.error(errorMessage, { id: toastId });
             setIsLoading(false);
         }

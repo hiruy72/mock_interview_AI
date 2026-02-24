@@ -28,11 +28,13 @@ export async function signUp(
             success: true,
             message: 'Account Created Successfully, Please Sign In'
         }
-    } catch (e: any) {
+    } catch (e: unknown) {
         console.error('SERVER ERROR: Error creating a user during signUp action:', e);
         console.error('Details:', JSON.stringify(e, null, 2));
 
-        if (e.code === 'auth/email-already-exists') {
+        const error = e as { code?: string; message?: string };
+
+        if (error.code === 'auth/email-already-exists') {
             return {
                 success: false,
                 message: 'Email already in use'
@@ -40,7 +42,7 @@ export async function signUp(
         }
         return {
             success: false,
-            message: `Server Error: ${e.message || 'Verification failed. Please check your credentials.'}`
+            message: `Server Error: ${error.message || 'Verification failed. Please check your credentials.'}`
         }
     }
 }
@@ -61,8 +63,7 @@ export async function signIn(params: SignInParams) {
             success: true,
         }
 
-    } catch (e) {
-
+    } catch (e: unknown) {
         console.log('error signing in', e);
         return {
             success: false,
@@ -106,12 +107,9 @@ export async function getCurrentUser(): Promise<User | null> {
             id: userRecord.id,
         } as User;
 
-    } catch (e) {
-
+    } catch (e: unknown) {
         console.log(e)
-
         return null;
-
     }
 }
 

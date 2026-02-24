@@ -33,7 +33,7 @@ export async function createInterview(params: {
       success: true,
       interviewId: interview.id,
     };
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error creating interview:", error);
     return {
       success: false,
@@ -52,7 +52,7 @@ export async function getInterviewById(id: string): Promise<Interview | null> {
       id: interview.id,
       ...interview.data(),
     } as Interview;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error getting interview:", error);
     return null;
   }
@@ -72,7 +72,7 @@ export async function getInterviewsByUserId(
       id: doc.id,
       ...doc.data(),
     })) as Interview[];
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error getting interviews:", error);
     return [];
   }
@@ -100,7 +100,7 @@ export async function getLatestInterviews(
     return interviews
       .filter((interview) => interview.userId !== userId)
       .slice(0, limit);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error getting latest interviews:", error);
     return [];
   }
@@ -126,7 +126,7 @@ export async function getFeedbackByInterviewId(
       id: feedbackDoc.id,
       ...feedbackDoc.data(),
     } as Feedback;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error getting feedback:", error);
     return null;
   }
@@ -209,7 +209,7 @@ Return ONLY valid JSON in this exact format:
       success: true,
       feedbackId: feedbackRef.id,
     };
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error creating feedback:", error);
     return {
       success: false,
@@ -283,7 +283,7 @@ If any information is missing, use your best judgment to provide sensible defaul
     });
 
     return resultCreate;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error generating interview:", error);
     return {
       success: false,
@@ -313,7 +313,7 @@ export async function deleteInterview(id: string) {
     return {
       success: true,
     };
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error deleting interview:", error);
     return {
       success: false,
