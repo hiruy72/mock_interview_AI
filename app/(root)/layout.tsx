@@ -4,6 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import SignOutButton from "@/components/SignOutButton";
+import ReduxUserInitializer from "@/components/ReduxUserInitializer";
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
   const isUserAuthenticated = await isAuthenticated();
@@ -14,6 +15,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="root-layout">
+      <ReduxUserInitializer user={user || null} />
       <nav className="flex justify-between items-center py-4 px-6 md:px-10 max-w-7xl mx-auto w-full">
         <Link href="/" className="flex items-center gap-2">
           <Image src="/logo.svg" alt="PrepWise" width={38} height={32} />
